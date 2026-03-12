@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import redirect
+# from django.template.loader import render_to_string
 
 
 #all_movies_string
@@ -25,8 +26,10 @@ def index (request):
 
 def all_movies_string(request, movie_string):
     try:
-        movie_info = movies_list[movie_string]
-        return HttpResponse(movie_info)
+        # movie_info = movies_list[movie_string]
+        # response_data = render_to_string('movies/movie.html')     
+        # return HttpResponse(response_data)
+        return render(request, 'movies/movie.html')
     except:
         return HttpResponseNotFound('Film není v databázi')
     
