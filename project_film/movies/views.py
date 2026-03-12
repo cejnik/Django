@@ -29,7 +29,10 @@ def all_movies_string(request, movie_string):
         # movie_info = movies_list[movie_string]
         # response_data = render_to_string('movies/movie.html')     
         # return HttpResponse(response_data)
-        return render(request, 'movies/movie.html')
+        return render(request, 'movies/movie.html',{
+            'mytext': 'Martin Chejn',
+            'movie_name': movie_string
+        })
     except:
         return HttpResponseNotFound('Film není v databázi')
     
