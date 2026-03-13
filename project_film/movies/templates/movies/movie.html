@@ -8,8 +8,13 @@
   <body>
     <h1>Super film pro tento týden</h1>
     <p>Harry Potter</p>
-    <p>{{ mytext|length }}</p>
+
     <p>{{movie_name|title}}</p>
-    <p>{{movie_name|add:'test'}}</p>
+    {% if movie_desc is not None %}
+    <p>{{movie_desc}}</p>
+
+    {% else %}
+    <p>Popis filmu není k dispozici.</p>
+    {% endif %}
   </body>
 </html>

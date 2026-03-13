@@ -12,17 +12,15 @@ movies_list = {
     'harrypotter':'Harry Potter je ...',
     'mortalcombat':'Mortal Combat je....',
     'mentalista':'Mentalista je ...',
+    'suicide squad': None,
 }
 
 def index (request):
-    content = ''
     movies_names = list(movies_list.keys())
-    content = '<ul>'
-    for one_movie in movies_names:
-        url = reverse('movie_url', args=[one_movie])
-        content += f'<li><a href="{url}">{one_movie}</a></li>'
-    content += '</ul>'
-    return HttpResponse(content)
+    return render(request, 'movies/index.html', {
+        'movie_names': movies_names
+    })
+
 
 def all_movies_string(request, movie_string):
     try:
@@ -31,7 +29,9 @@ def all_movies_string(request, movie_string):
         # return HttpResponse(response_data)
         return render(request, 'movies/movie.html',{
             'mytext': 'Martin Chejn',
-            'movie_name': movie_string
+            'movie_name': movie_string,
+            'movie_desc': movies_list[movie_string],
+
         })
     except:
         return HttpResponseNotFound('Film není v databázi')
