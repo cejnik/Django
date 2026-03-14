@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Netflix{% endblock title %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "netflix/index.css" %}" />
+{% endblock css_files %}
+
+{% block content %}
+  <header>
+    <div class="header-top">
+      <img
+        src="{% static "netflix/images/netflix-logo.png" %}"
+        alt="netflix_logo"
+      />
+      <button>Přihlásit se</button>
+    </div>
+    <div class="header-textbox">
+      <h1>Neomezené sledování filmů, TV pořadů a dalšího obsahu</h1>
+      <p>Už od 239 kč. Zrušte kdykoliv.</p>
+      <p>
+        Jste připraveni se dívat? Pro vytvoření nebo obnovení členčství zadejte
+        email
+      </p>
+      <form>
+        <input type="email" placeholder="E-mailová adresa" />
+        <button type="submit">Začít</button>
+      </form>
+    </div>
+  </header>
+{% endblock content %}

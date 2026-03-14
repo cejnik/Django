@@ -1,0 +1,91 @@
+header {
+  min-height: 100vh;
+  background:
+    linear-gradient(black, rgba(0, 0, 0, 0.499)), url(images/background.jpg);
+  padding: 0px 150px;
+}
+.header-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.header-top img {
+  width: 150px;
+}
+
+.header-top button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 15px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.header-top button:hover {
+  background-color: #b41820;
+}
+
+.header-textbox {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.header-textbox h1 {
+  font-size: 50px;
+  width: 500px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-textbox p:nth-child(2) {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.header-textbox p:nth-child(3) {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.header-textbox form {
+  display: flex;
+  align-items: center;
+}
+
+.header-textbox form input {
+  width: 400px;
+  height: 60px;
+  background: linear-gradient(rgba(59, 57, 57, 0.74), rgba(0, 0, 0, 0.648));
+  border:
+    0,
+    5px solid white;
+  outline: none;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.header-textbox form button {
+  height: 60px;
+  margin-left: 10px;
+  padding: 10px 25px;
+  background: #e50914;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 25px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.header-textbox form button:hover {
+  background-color: #b41820;
+}

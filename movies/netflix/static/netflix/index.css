@@ -1,0 +1,163 @@
+/* Netflix Styles */
+@import url('https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Netflix Sans', Arial, sans-serif;
+  background-color: #141414;
+  color: white;
+}
+
+header {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url('../netflix/images/background.jpg') center/cover no-repeat;
+}
+
+/* Dark overlay gradient */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  z-index: 1;
+}
+
+.header-top {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 4%;
+}
+
+.header-top img {
+  width: 150px;
+  height: auto;
+}
+
+.header-top button {
+  background: #e50914;
+  color: white;
+  border: none;
+  padding: 7px 17px;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.header-top button:hover {
+  background: #f40612;
+}
+
+.header-textbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+}
+
+.header-textbox h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.header-textbox p {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+.header-textbox p:nth-child(2) {
+  margin-bottom: 25px;
+}
+
+.header-textbox form {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 20px;
+}
+
+.header-textbox input {
+  width: 450px;
+  max-width: 100%;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.header-textbox input:focus {
+  box-shadow: 0 0 0 4px #0077ff;
+}
+
+.header-textbox button {
+  background: #e50914;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.header-textbox button:hover {
+  background: #f40612;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-top img {
+    width: 100px;
+  }
+
+  .header-textbox h1 {
+    font-size: 2rem;
+  }
+
+  .header-textbox p {
+    font-size: 1.1rem;
+  }
+
+  .header-textbox form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .header-textbox input {
+    border-radius: 4px;
+  }
+
+  .header-textbox button {
+    border-radius: 4px;
+    font-size: 1.2rem;
+  }
+}
