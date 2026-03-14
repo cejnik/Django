@@ -1,20 +1,36 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Super film pro tento týden</h1>
-    <p>Harry Potter</p>
+{% extends "base.html" %}
+{% load static %}
 
-    <p>{{movie_name|title}}</p>
-    {% if movie_desc is not None %}
-    <p>{{movie_desc}}</p>
+{% block css_files %}
+<link rel="stylesheet" href="{% static "movies/movie.css" %}">
+{% endblock css_files %}
 
+{% block page_title %} Filmy {% endblock page_title%}
+
+{% block content %}
+{% include "./includes/header.html" %}
+
+<div class="glass-container">
+  <div class="movie-detail">
+    <h1 class="movie-title">Super film pro tento týden</h1>
+    
+    <div class="movie-info">
+      <p><strong>Film:</strong> {{ movie_name|default:"N/A" }}</p>
+    </div>
+
+    {% if movie_desc %}
+    <div class="movie-description">
+      <p>{{ movie_desc }}</p>
+    </div>
     {% else %}
-    <p>Popis filmu není k dispozici.</p>
+    <div class="movie-description">
+      <p>Popis filmu není k dispozici.</p>
+    </div>
     {% endif %}
-  </body>
-</html>
+
+    <div style="margin-top: 20px;">
+      <button class="btn-glass">Zpět na seznam</button>
+    </div>
+  </div>
+</div>
+{% endblock content %}

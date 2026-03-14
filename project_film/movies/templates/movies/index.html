@@ -1,16 +1,44 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main Page</title>
-  </head>
-  <body>
-    <h1>Welcome to the Movie Database</h1>
-    {% for one_movie in movie_names %}
-    <ul>
-      <li><a href="{% url 'movie_url' one_movie %}"> {{ one_movie }} </a></li>
-    </ul>
-    {% endfor %}
-  </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "movies/index.css" %}">
+{% endblock css_files %}
+
+{% block page_title %}Movies - Index{% endblock page_title%}
+
+{% block content %}
+{% include "./includes/header.html"%}
+
+<div class="glass-container">
+    <div class="index-header">
+        <h1 class="index-title">🎬 Filmová Databáze</h1>
+        <p class="index-subtitle">Prohlédněte si naši kolekci filmů</p>
+    </div>
+
+    <div class="movies-list-container">
+        {% if movie_names %}
+        <ul class="movies-list">
+            {% for one_movie in movie_names %}
+            <li class="movie-item">
+                <a href="{% url 'movie_url' one_movie %}" class="movie-link">
+                    {{ one_movie }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="index-stats">
+            <div class="stat-item glass">
+                <span class="stat-number">{{ movie_names|length }}</span>
+                <span class="stat-label">Filmů celkem</span>
+            </div>
+        </div>
+        {% else %}
+        <div class="no-movies">
+            <p>Žádné filmy k zobrazení.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
