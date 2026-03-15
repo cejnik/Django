@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Všechny filmy - Netflix
+{% endblock title %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "netflix/all_movies.css" %}" />
+  <link rel="stylesheet" href="{% static "netflix/includes/one_movie.css" %}" />
+{% endblock css_files %}
+
+{% block content %}
+  <main class="all_movies">
+    <header>
+      <h1>Celá databáze filmů</h1>
+    </header>
+    <section class="movies-grid">
+      {% for one_movie in all_movies_list %}
+        {% include "netflix/includes/one_movie.html" %}
+      {% endfor %}
+    </section>
+  </main>
+{% endblock content %}

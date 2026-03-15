@@ -1,0 +1,44 @@
+/* One Movie Card - Netflix Style */
+.one_movie {
+  background: var(--netflix-dark, #181818);
+  color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.one_movie:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.one_movie img {
+  width: 100%;
+  display: block;
+}
+
+.one_movie h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 12px 0 4px;
+  padding: 0 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.one_movie h3 {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 400;
+  margin-bottom: 8px;
+  padding: 0 12px;
+}
+
+.one_movie p {
+  font-size: 0.8rem;
+  color: #777;
+  padding: 0 12px 16px;
+  line-height: 1.4;
+}

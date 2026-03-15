@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Netflix
+{% endblock title %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "netflix/index.css" %}" />
+{% endblock css_files %}
+
+{% block content %}
+  <main>
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>
+          Filmy a seriály
+          <br />
+          neomezeně
+        </h1>
+        <p>Sledujte kdekoliv a kdykoliv.</p>
+        <a href="{% url 'movies_page' %}" class="btn-primary">
+          Zobrazit všechny filmy
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured Movies Row -->
+    <section id="featured">
+      <h2>Populární filmy</h2>
+      <div class="movie-row">
+        {% for movie in featured_movies|slice:":6" %}
+          <div class="movie-card">
+            <img
+              src="{% static 'netflix/images/'|add:movie.image %}"
+              alt="{{ movie.title }}"
+            />
+            <div class="movie-info">
+              <h3>{{ movie.title }}</h3>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- All Movies Link -->
+    <section id="cta">
+      <a href="{% url 'movies_page' %}" class="btn-secondary">
+        Prozkoumat celou databázi
+      </a>
+    </section>
+  </main>
+{% endblock content %}

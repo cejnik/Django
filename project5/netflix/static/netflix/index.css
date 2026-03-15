@@ -1,0 +1,189 @@
+/* Netflix-style Minimalistic Design */
+:root {
+  --netflix-red: #e50914;
+  --netflix-black: #141414;
+  --netflix-dark: #181818;
+  --netflix-gray: #808080;
+  --netflix-white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--netflix-black);
+  color: var(--netflix-white);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+#hero {
+  position: relative;
+  height: 80vh;
+  min-height: 500px;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), var(--netflix-black)),
+    url('https://assets.codepen.io/2/your-image.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(0deg, var(--netflix-black) 0%, transparent 50%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 20px;
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: var(--netflix-gray);
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--netflix-red);
+  color: var(--netflix-white);
+}
+
+.btn-primary:hover {
+  background-color: #f40612;
+}
+
+.btn-secondary {
+  background-color: var(--netflix-gray);
+  color: var(--netflix-white);
+}
+
+.btn-secondary:hover {
+  background-color: #999;
+}
+
+/* Featured Section */
+#featured {
+  padding: 40px 60px;
+}
+
+#featured h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.movie-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.movie-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.movie-row::-webkit-scrollbar-track {
+  background: var(--netflix-dark);
+}
+
+.movie-row::-webkit-scrollbar-thumb {
+  background: var(--netflix-gray);
+  border-radius: 4px;
+}
+
+/* Movie Card */
+.movie-card {
+  flex: 0 0 200px;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-info {
+  padding: 12px;
+  background: var(--netflix-dark);
+}
+
+.movie-info h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* CTA Section */
+#cta {
+  padding: 60px 20px;
+  text-align: center;
+  background: var(--netflix-black);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+
+  #featured {
+    padding: 20px;
+  }
+
+  .movie-card {
+    flex: 0 0 150px;
+  }
+
+  .movie-card img {
+    height: 220px;
+  }
+}

@@ -1,0 +1,22 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static "app.css" %}" />
+    <title>{% block title %}{% endblock title %}</title>
+    {% block css_files %}{% endblock css_files %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{% url "starting_page" %}">Úvodní strana</a></li>
+          <li><a href="{% url "movies_page" %}">Všechny Filmy</a></li>
+        </ul>
+      </nav>
+    </header>
+    {% block content %}{% endblock content %}
+  </body>
+</html>
