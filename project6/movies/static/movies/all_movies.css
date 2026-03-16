@@ -1,0 +1,16 @@
+.movies-box ul {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+
+
+}
+
+.movies-box img {
+    width: 250px;
+    height: 370px;
+
+}

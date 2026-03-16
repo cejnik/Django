@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Films{% endblock title %} 
+
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static "movies/movie_detail.css" %}">
+{% endblock css_files %} 
+
+{% block content %}
+<main>
+    <section class="one-movie-box">
+        <div class="one-movie">
+            <section class="button">
+                <a href="{% url "all_movies_page" %}">Zpět na všechny filmy</a>
+            </section>
+            <img src="{% static "movies/images/"|add:visited_movie.image %}" alt="">
+            <h1>{{ visited_movie.title }}</h1>
+            <p>{{visited_movie.author}}</p>
+            <p>{{visited_movie.content}}</p>
+            <p>{{visited_movie.data}}</p>
+            <p>{{visited_movie.excerpt}}</p>
+        </div>
+    </section>
+</main>
+
+
+{% endblock content %}

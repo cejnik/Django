@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}{% endblock title %}
+
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static "movies/index.css" %}">
+
+{% endblock css_files %} 
+
+{% block content %}
+    <main>
+        <section class="button">
+            <a href="{% url "all_movies_page" %}">Welcome to Netflix</a>
+        </section>
+    </main>
+{% endblock content %}

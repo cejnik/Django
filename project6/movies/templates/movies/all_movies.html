@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %} {% endblock title %} 
+
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static "movies/all_movies.css" %}">
+
+{% endblock css_files %} 
+
+{% block content %}
+<main>
+    <section class="movies-box">
+            <ul>
+                {% for one_movie in all_movies  %}
+                    <a href="{% url "movie_detail_page" one_movie.slug %}">
+                        <img src="{% static "movies/images/"|add:one_movie.image %}" alt="">
+                    </a>
+                
+                
+                {% endfor %}
+            </ul>
+    </section>
+</main>
+{% endblock content %}
