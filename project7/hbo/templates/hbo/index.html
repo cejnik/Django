@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "hbo/index.css" %}">
+{% endblock css_files %}
+{% block title %}Vítejte{% endblock title %}
+
+{% block content %}
+    <main>
+        <section class="button">
+            <a href="{% url "all_movies" %}">Přehled filmů</a>
+        </section>
+    </main>
+
+{% endblock content %}

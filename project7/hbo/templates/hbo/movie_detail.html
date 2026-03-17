@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detail!{% endblock title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static "hbo/movie_detail.css" %}">
+{% endblock css_files %}
+
+
+{% block content %}
+<main class="main_block">
+    <section class="film_box">
+        <section class="button">
+            <a href="{% url "all_movies" %}">Zpět na všechny filmy</a>
+        </section>
+        <img src="{% static "hbo/images/"|add:films.image %}" alt="">
+        <h1>{{ films.title }}</h1>
+        <p>{{films.author}}</p>
+        <p>{{films.content}}</p>
+        <p>{{films.data}}</p>
+        <p>{{films.excerpt}}</p>
+    </section>
+</main>
+
+{% endblock content %}
