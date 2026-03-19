@@ -7,7 +7,9 @@ class Book(models.Model):
     pages = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(500)]
     )
+    author = models.CharField(null=True,max_length=50)
+    is_bestseller = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Název knihy: {self.title} a stránek {self.pages}'
+        return f'Název knihy: {self.title} s {self.author} a stránek {self.pages}, a je to bestseller: {self.is_bestseller}'
 
