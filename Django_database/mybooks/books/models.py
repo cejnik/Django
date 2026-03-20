@@ -11,5 +11,5 @@ class Book(models.Model):
     is_bestseller = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Název knihy: {self.title} s {self.author} a stránek {self.pages}, a je to bestseller: {self.is_bestseller}'
+        return f'Název knihy: {self.title} s autorem: {self.author} a stránek {self.pages}, a je to bestseller: {self.is_bestseller}'
 
