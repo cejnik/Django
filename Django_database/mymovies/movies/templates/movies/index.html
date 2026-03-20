@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static "movies/index.css" %}">
+{% endblock styles %}
+
+{% block title %}Všechny filmy{% endblock title %}
+
+{% block content %}
+    <section class="movies">
+            {% for one_movie in movies  %}
+            <ul>
+                <li>Film: {{one_movie.title}}, který má hodnocení {{one_movie.rating}} a příběhem: {{one_movie.description}}
+                    {% if one_movie.is_for_adults %}
+                        jen pro dospělé
+                    {% else %}
+                        pro všechny
+                    {% endif %}
+                </li>
+
+            </ul>
+            {% endfor %}
+    </section>
+
+{% endblock content %}
