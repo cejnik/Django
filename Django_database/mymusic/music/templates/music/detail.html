@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+
+{{musics.title}}
+
+{% endblock title %}
+
+
+{% block content %}
+    <h1>{{musics.title}}</h1>
+        <p>{{musics.author}}</p>
+    <h2>{{musics.description}}</h2>
+{% if musics.is_popular %}
+        <p>Populární píseň</p>
+
+{% endif %}
+
+
+
+{% endblock content %}

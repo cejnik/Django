@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+{% block content %}
+
+    <ul>
+        {% for one_music in musics  %}
+            <li>
+                {% comment %} <a href="{% url "detail" one_music.slug %}"> {% endcomment %}
+                <a href="{{one_music.get_absolute_url}}">
+                    {{one_music.title}} - rating: {{one_music.rating}}
+                </a>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+    <p>Počet písniček: {{total_songs_number}} </p>
+    <p>Průměrné hodnocení: {{avg_rating.rating__avg}}</p>
+
+
+
+{% endblock content %}
