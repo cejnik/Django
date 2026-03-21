@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Premiants {% endblock title %}
+
+{% block content %}
+    <a href="{% url "home_page" %}">Odkaz na úvodní stránku</a>
+    <ul>
+        {% for one_premiant in premiants  %}
+            <li>
+                {{one_premiant.first_name}} {{one_premiant.second_name}}: {{one_premiant.email}}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
+
+
+
+

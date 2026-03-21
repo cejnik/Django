@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Seznam student{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static "school/index.css" %}">
+{% endblock styles %}
+
+{% block content %}
+    <a href="{% url "premiants" %}">Odkaz na premianty</a>
+    <ul>
+        {% for one_stundet in students %}
+   
+            <li class="{% if one_stundet.is_premiant %} premiant {% endif %}">
+                
+                {{one_stundet.first_name}} {{one_stundet.second_name}}: {{one_stundet.email}}
+                {% if one_stundet.is_premiant %}
+                . Je dobrej
+                {% else %}
+                nic moc
+                {% endif %}
+
+            </li>
+        
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
