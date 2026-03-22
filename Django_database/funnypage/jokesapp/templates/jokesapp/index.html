@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😄 Vtipy & Srandičky</title>
+    <link rel="stylesheet" href="{% static "jokesapp/styles.css" %}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>😂</text></svg>">
+</head>
+<body>
+    <!-- Navigace -->
+    <nav class="navbar">
+        <a href="{% url "home_page" %}" class="navbar-brand">😂 Vtipy</a>
+        <ul class="navbar-nav">
+            <li><a href="{% url "home_page" %}">Domů</a></li>
+            <li><a href="{% url "all_jokes_page" %}">Všechny vtipy</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hlavní obsah -->
+    <main class="main-container">
+        <!-- Hero sekce -->
+        <section class="hero">
+            <h1 class="hero-title">Přidej svůj <span class="highlight">vtip</span></h1>
+            <p class="hero-subtitle">Máš nějaký dobrý vtip? Poděl se o něj s ostatními a rozesměj celý svět!</p>
+        </section>
+
+        <!-- Formulář -->
+        <section class="joke-form-container">
+            <form method="POST" action="/" class="joke-form">
+                {% csrf_token %}
+                
+                {% for one_field in jokeForm %}
+                    <div class="form-group">
+                        <label for="{{ one_field.id_for_label }}">{{ one_field.label }}</label>
+                        <div class="form-inputs {% if one_field.errors %}errors{% endif %}">
+                            {{ one_field.errors }}
+                            {{ one_field }}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn-submit">Odeslat vtip 🚀</button>
+                
+                <a href="{% url "all_jokes_page" %}" class="link-jokes">
+                    Zobrazit všechny vtipy
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </a>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
