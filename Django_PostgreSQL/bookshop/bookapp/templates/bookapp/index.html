@@ -10,10 +10,8 @@
         {% csrf_token %}
         <fieldset>
             <legend>Údaje o knize</legend>
-            Název knihy: <input type="text" name='book-name'>
-            Cena knihy: <input type="number" name='book-price'>
-        </fieldset>
+            {{bookForm}}
+        </fieldset>  
         <button>Odeslat</button>
-
     </form>
 {% endblock content %}
