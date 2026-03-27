@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "1. Django - co je to Django",
+    "url": "https://youtu.be/Yqq8H3wIjSQ",
+    "course": "Django"
+  },
+  {
+    "id": 2,
+    "title": "2. Django - nainstalování všeho potřebného",
+    "url": "https://youtu.be/n9NzIe_pN0s",
+    "course": "Django"
+  },
+  {
+    "id": 3,
+    "title": "3. Django - vytvoření projektu",
+    "url": "https://youtu.be/jMFXI7KZzkU",
+    "course": "Django"
+  },
+  {
+    "id": 4,
+    "title": "4. Django - spuštění projektu",
+    "url": "https://youtu.be/NiiayUs4oqY",
+    "course": "Django"
+  },
+  {
+    "id": 5,
+    "title": "5. Django - procvičování založení projektu",
+    "url": "https://youtu.be/xQWjepyCKH8",
+    "course": "Django"
+  }
+]
