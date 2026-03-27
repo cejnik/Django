@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+    <h1>Administrace - dashboard</h1>
+        <p>Vítej {{request.user.username}}</p>
+        <p>Email: {{request.user.email}}</p>
+        <a href="{% url "protected_page_url" %}">Další stránka administrace</a>
+    <form method="POST" action="{% url 'logout_url' %}">
+        {% csrf_token %}
+        <button type="submit">Odhlásit se</button>
+    </form>
+
+{% endblock content %}

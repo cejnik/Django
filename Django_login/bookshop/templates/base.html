@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block styles %}{% endblock styles %}
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url "homepage_url" %}">Úvodní strana</a></li>
+                <li><a href="{% url "register_url" %}">Registrace</a></li>
+                <li><a href="{% url "login_url" %}">Přihlášení</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %}{% endblock content %}
+    
+</body>
+</html>
