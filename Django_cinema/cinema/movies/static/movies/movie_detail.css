@@ -1,0 +1,107 @@
+.movie-detail {
+    display: grid;
+    grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.movie-detail__poster-panel,
+.movie-detail__content {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg-panel-strong);
+    box-shadow: var(--shadow-soft);
+}
+
+.movie-detail__poster-panel {
+    overflow: hidden;
+}
+
+.movie-detail__poster {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.movie-detail__poster-fallback {
+    display: grid;
+    place-items: center;
+    min-height: 420px;
+    background: linear-gradient(180deg, #dcc8b8 0%, #cdb29f 100%);
+    color: rgba(31, 41, 51, 0.65);
+    font-weight: 600;
+}
+
+.movie-detail__content {
+    padding: 32px;
+}
+
+.movie-detail__eyebrow {
+    margin: 0 0 10px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.movie-detail__title {
+    margin: 0 0 18px;
+    font-size: clamp(2rem, 3vw, 3.4rem);
+    line-height: 1.05;
+}
+
+.movie-detail__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.movie-detail__pill {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(184, 92, 56, 0.1);
+    color: var(--accent-dark);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.movie-detail__description {
+    margin: 0 0 28px;
+    color: var(--text-soft);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.movie-detail__back-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: rgba(184, 92, 56, 0.12);
+    color: var(--accent-dark);
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.movie-detail__back-link:hover {
+    background: rgba(184, 92, 56, 0.18);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 860px) {
+    .movie-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .movie-detail__poster-panel {
+        max-width: 420px;
+    }
+}
+
+@media (max-width: 640px) {
+    .movie-detail__content {
+        padding: 24px;
+    }
+}
