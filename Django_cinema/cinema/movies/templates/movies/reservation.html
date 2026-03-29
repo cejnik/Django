@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Reservations{% endblock title %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static "movies/account.css" %}">
+{% endblock css_styles %}
+{% block content %}
+    <section class="account-page">
+        <div class="account-panel">
+            <p class="account-panel__eyebrow">My tickets</p>
+            <h1 class="account-panel__title">My reservations</h1>
+
+            {% if reservations %}
+                <div class="reservation-list">
+                    {% for one_reservation in reservations %}
+                        <article class="reservation-card">
+                            <h2 class="reservation-card__title">{{ one_reservation.screening.film }}</h2>
+                            <p class="reservation-card__meta">Tickets: {{ one_reservation.tickets_count }}</p>
+                            <p class="reservation-card__meta">Hall: {{ one_reservation.screening.hall }}</p>
+                            <p class="reservation-card__meta">Screening time: {{ one_reservation.screening.screening_time|date:"Y-m-d H:i" }}</p>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="account-panel__empty">You do not have any reservations yet.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock content %}
+

@@ -29,5 +29,26 @@
             <p class="movie-detail__description">{{ movie.description }}</p>
             <a class="movie-detail__back-link" href="{% url "homepage" %}">Back to movie list</a>
         </div>
+
+        <div class="movie-detail__screenings">
+            <p class="movie-detail__eyebrow">Available screenings</p>
+            <h2 class="movie-detail__screenings-title">Choose a time</h2>
+
+            {% if screenings %}
+                <div class="movie-detail__screening-list">
+                    {% for screening in screenings %}
+                        <div class="movie-detail__screening-item">
+                            <div class="movie-detail__screening-copy">
+                                <span class="movie-detail__screening-time">{{ screening.screening_time|date:"Y-m-d H:i" }}</span>
+                                <span class="movie-detail__screening-hall">Hall: {{ screening.hall.name }}</span>
+                            </div>
+                            <a class="movie-detail__reserve-link" href="{% url "create_reservation_url" screening.id %}">Reserve</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="movie-detail__screenings-empty">No screenings are currently available for this movie.</p>
+            {% endif %}
+        </div>
     </section>
 {% endblock content %}
