@@ -119,6 +119,55 @@
     font-size: 0.92rem;
 }
 
+.movie-detail__reserve-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.movie-detail__tickets-input {
+    width: 78px;
+    padding: 10px 12px;
+    border: 1px solid rgba(184, 92, 56, 0.2);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text-main);
+    font: inherit;
+    text-align: center;
+}
+
+.movie-detail__tickets-input:focus {
+    outline: 2px solid rgba(184, 92, 56, 0.18);
+    border-color: rgba(184, 92, 56, 0.34);
+}
+
+.movie-detail__reserve-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff8f2;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.movie-detail__reserve-button:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+}
+
+.movie-detail__reserve-button:focus-visible {
+    outline: 2px solid rgba(184, 92, 56, 0.22);
+    outline-offset: 2px;
+}
+
 .movie-detail__reserve-link {
     display: inline-flex;
     align-items: center;
@@ -179,5 +228,14 @@
     .movie-detail__screening-item {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .movie-detail__reserve-form {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .movie-detail__tickets-input {
+        width: 88px;
     }
 }

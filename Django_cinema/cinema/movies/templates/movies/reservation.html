@@ -14,10 +14,14 @@
                 <div class="reservation-list">
                     {% for one_reservation in reservations %}
                         <article class="reservation-card">
-                            <h2 class="reservation-card__title">{{ one_reservation.screening.film }}</h2>
-                            <p class="reservation-card__meta">Tickets: {{ one_reservation.tickets_count }}</p>
-                            <p class="reservation-card__meta">Hall: {{ one_reservation.screening.hall }}</p>
-                            <p class="reservation-card__meta">Screening time: {{ one_reservation.screening.screening_time|date:"Y-m-d H:i" }}</p>
+                                <h2 class="reservation-card__title">{{ one_reservation.screening.film }}</h2>
+                                    <p class="reservation-card__meta">Tickets: {{ one_reservation.tickets_count }}</p>
+                                    <p class="reservation-card__meta">Hall: {{ one_reservation.screening.hall.name }}</p>
+                                    <p class="reservation-card__meta">Screening time: {{ one_reservation.screening.screening_time|date:"Y-m-d H:i" }}</p>
+                            <form action="{% url "delete_reservation_url" one_reservation.id %}" method='POST' class="reservation-card__form">
+                                {% csrf_token %}
+                                <button class="reservation-card__button">Delete this reservation</button>
+                            </form>
                         </article>
                     {% endfor %}
                 </div>
@@ -27,4 +31,3 @@
         </div>
     </section>
 {% endblock content %}
-

@@ -42,7 +42,11 @@
                                 <span class="movie-detail__screening-time">{{ screening.screening_time|date:"Y-m-d H:i" }}</span>
                                 <span class="movie-detail__screening-hall">Hall: {{ screening.hall.name }}</span>
                             </div>
-                            <a class="movie-detail__reserve-link" href="{% url "create_reservation_url" screening.id %}">Reserve</a>
+                            <form action="{% url 'create_reservation_url' screening.id %}" method="post" class="movie-detail__reserve-form">
+                                {% csrf_token %}
+                                <input class="movie-detail__tickets-input" type="number" name="tickets_count" min="1" value="1">
+                                <button class="movie-detail__reserve-button" type="submit">Reserve</button>
+                            </form>
                         </div>
                     {% endfor %}
                 </div>

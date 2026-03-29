@@ -10,5 +10,6 @@ urlpatterns = [
     path("login/", auth_views.LoginView.as_view(template_name='movies/login.html', authentication_form=LoginForm), name='login_url'),
     path('reservation/', views.reservation, name='reservation'),
     path('create-reservation/<int:screening_id>/', views.create_reservation, name='create_reservation_url'),
-    path("logout/",auth_views.LogoutView.as_view(), name='logout_url')
+    path("logout/",auth_views.LogoutView.as_view(), name='logout_url'),
+    path('delete-reservation/<int:reservation_id>/', views.delete_reservation, name='delete_reservation_url')
 ]
