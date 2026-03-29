@@ -12,6 +12,22 @@
     <div class="page-shell">
         <header class="site-header">
             <a class="site-brand" href="{% url "homepage" %}">Cinema</a>
+
+            {% if not user.is_authenticated %}
+            <nav class="site-nav">
+                <a class="site-nav__link site-nav__link--secondary" href="{% url "registration_url" %}">Register</a>
+                <a class="site-nav__link" href="{% url "login_url" %}">Login</a>
+            </nav>
+            {% else %}
+                <nav class="site-nav">
+                    <a class="site-nav__link site-nav__link--secondary" href="{% url "reservation" %}">My reservations</a>
+                    <form class="site-nav__form" method="POST" action="{% url "logout_url" %}">
+                        {% csrf_token %}
+                        <button class="site-nav__link site-nav__button" type="submit">Logout</button>
+                    </form>
+                </nav>
+            {% endif %}
+
         </header>
 
         <main class="page-content">

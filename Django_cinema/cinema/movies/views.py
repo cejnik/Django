@@ -9,7 +9,7 @@ def index(request):
     return render(request, 'movies/index.html',{
         'movies':movies
     })
-@login_required
+
 def movie_detail(request, slug):
     movie = get_object_or_404(Film, slug=slug)
     screenings = Screening.objects.filter(film=movie)
