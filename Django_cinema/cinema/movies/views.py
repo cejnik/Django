@@ -53,11 +53,11 @@ def create_reservation(request, screening_id):
                     messages.error(request, 'This screening does not have an assigned hall.')
                     return redirect('movie_detail', slug=screening_now.film.slug)
 
-                existing_reservation = Reservation.objects.filter(user=request.user, screening=screening_now).first()
-                current_user_old_tickets = existing_reservation.tickets_count if existing_reservation else 0
-                reserved_tickets_data = Reservation.objects.filter(screening=screening_now).aggregate(Sum('tickets_count'))
-                reserved_tickets = reserved_tickets_data['tickets_count__sum'] or 0
-                new_total_tickets = reserved_tickets - current_user_old_tickets + tickets_count
+                existing_reservation = Reservation.objects.filter(user=request.user, screening=screening_now).first() #objekt
+                current_user_old_tickets = existing_reservation.tickets_count if existing_reservation else 0 #int
+                reserved_tickets_data = Reservation.objects.filter(screening=screening_now).aggregate(Sum('tickets_count')) #dictionary
+                reserved_tickets = reserved_tickets_data['tickets_count__sum'] or 0 #int
+                new_total_tickets = reserved_tickets - current_user_old_tickets + tickets_count #int
                 if new_total_tickets > screening_now.hall.capacity:
                     messages.error(request, 'There are not enough seats available for this screening.')
                     return redirect('movie_detail', slug=screening_now.film.slug)
