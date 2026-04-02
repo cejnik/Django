@@ -69,3 +69,41 @@ class ReservationTests(TestCase):
         self.assertEqual(Reservation.objects.count(),0)
         self.assertRedirects(response, reverse('movie_detail', args=[self.screening.film.slug]))
 
+    def test_update_tickets(self):
+        response = self.client.post(
+            reverse('create_reservation_url', args=[self.screening.id]), {'tickets_count': 2})
+        reservation = Reservation.objects.first()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Reservation.objects.count(),1)
+        self.assertEqual(reservation.tickets_count,2)
+        self.assertRedirects(response, reverse('reservation'))
+        
+        response = self.client.post(
+            reverse('create_reservation_url', args=[self.screening.id]), {'tickets_count': 4})
+        reservation = Reservation.objects.first()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Reservation.objects.count(),1)
+        self.assertRedirects(response, reverse('reservation'))
+        self.assertEqual(reservation.tickets_count,4)
+
+
+    def test_delete_reservation(self):
+        reservation = Reservation.objects.create(
+            user = self.user,
+            screening = self.screening,
+            tickets_count = 1
+        )
+        response = self.client.post(
+            reverse('delete_reservation_url', args=[reservation.id]))
+        self.assertRedirects(response, reverse('reservation'))
+        self.assertEqual(Reservation.objects.count(),0)
+    
+    def test_anonymous_user_cannot_create_reservation(self):
+        self.client.logout()
+        response = self.client.post(
+            reverse('create_reservation_url', args=[self.screening.id]), {'tickets_count': 1})
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('login_url') + '?next=' + reverse('create_reservation_url', args=[self.screening.id]))
+        self.assertEqual(Reservation.objects.count(),0)
+
+        
