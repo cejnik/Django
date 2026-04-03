@@ -102,6 +102,8 @@ def select_seats(request,reservation_id):
 
     occupied_seats = set()
     for one_reservation in screening_reservations:
+        if one_reservation == reservation:
+            continue
         for seat in one_reservation.reserved_seats.all():
             occupied_seats.add(seat)
 
@@ -109,6 +111,27 @@ def select_seats(request,reservation_id):
     for seat in hall_seats:
         if seat not in occupied_seats:
             available_seats.append(seat)
+
+    if request.method == 'POST':
+        if reservation.tickets_count != len(request.POST.getlist('one_seat')):
+            messages.error(request, f'Please select exactly {reservation.tickets_count} seats.')
+            return redirect('select_seat_url', reservation_id=reservation.id)
+        selected_seat_ids = request.POST.getlist('one_seat')
+        selected_seats = Seat.objects.filter(id__in=selected_seat_ids, hall=hall)
+        if len(selected_seats) != len(selected_seat_ids):
+            messages.error(request, 'Invalid seat selection.')
+            return redirect('select_seat_url', reservation_id=reservation.id)
+        for seat in selected_seats:
+            if seat in occupied_seats:
+                messages.error(request, f'Seat {seat} is already occupied. Please select different seats.')
+                return redirect('select_seat_url', reservation_id=reservation.id)
+        reservation.reserved_seats.set(selected_seats)
+        messages.success(request, 'Your seats have been reserved successfully.')
+        return redirect('reservation')
+        
+ 
+
+
 
     return render(request, 'movies/select_seat.html', {
         'reservation': reservation,
