@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Film, Hall, Screening, Reservation
+from .models import Film, Hall, Screening, Reservation, Seat
 from django.urls import reverse
 from django.utils import timezone
 
@@ -107,3 +107,22 @@ class ReservationTests(TestCase):
         self.assertEqual(Reservation.objects.count(),0)
 
         
+    def test_generating_seats(self):
+        hall = Hall.objects.create(
+            name = 'Test Hall',
+            capacity = 12,
+        )
+        generated_seats = Seat.objects.filter(hall=hall).count()
+        self.assertEqual(generated_seats,12)
+        expected_seats = [
+            'Test Hall - A1', 'Test Hall - A2', 'Test Hall - A3', 'Test Hall - A4', 'Test Hall - A5', 'Test Hall - A6', 'Test Hall - A7', 'Test Hall - A8', 'Test Hall - A9', 'Test Hall - A10',
+            'Test Hall - B1', 'Test Hall - B2'
+        ]
+        
+        #actual_seats = [str(seat) for seat in Seat.objects.filter(hall=hall)]
+        actual_seats = []
+        for seat in Seat.objects.filter(hall=hall):
+            actual_seats.append(str(seat))
+        self.assertListEqual(actual_seats, expected_seats)
+
+
