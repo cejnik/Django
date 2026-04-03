@@ -128,10 +128,6 @@ def select_seats(request,reservation_id):
         reservation.reserved_seats.set(selected_seats)
         messages.success(request, 'Your seats have been reserved successfully.')
         return redirect('reservation')
-        
- 
-
-
 
     return render(request, 'movies/select_seat.html', {
         'reservation': reservation,

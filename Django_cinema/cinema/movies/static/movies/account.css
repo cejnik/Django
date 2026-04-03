@@ -94,6 +94,17 @@
     background: rgba(184, 92, 56, 0.07);
 }
 
+.reservation-card__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 22px;
+    align-items: start;
+}
+
+.reservation-card__details {
+    min-width: 0;
+}
+
 .reservation-card__title {
     margin: 0 0 12px;
     font-size: 1.2rem;
@@ -108,6 +119,57 @@
 
 .reservation-card__meta:last-child {
     margin-bottom: 0;
+}
+
+.reservation-card__seats {
+    display: grid;
+    gap: 10px;
+    justify-items: end;
+    align-content: start;
+}
+
+.reservation-card__seats-label {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.reservation-card__seat-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.reservation-card__seat-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    padding: 7px 12px;
+    border: 1px solid rgba(184, 92, 56, 0.2);
+    border-radius: 999px;
+    background: #fff8f2;
+    box-shadow: 0 10px 18px rgba(143, 68, 38, 0.08);
+    color: var(--accent-dark);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.reservation-card__seat-pill:hover {
+    transform: translateY(-2px) rotate(-1deg);
+    background: rgba(184, 92, 56, 0.12);
+    border-color: rgba(184, 92, 56, 0.32);
+    box-shadow: 0 14px 22px rgba(143, 68, 38, 0.14);
+}
+
+.reservation-card__seats-empty {
+    margin: 0;
+    color: var(--text-soft);
+    line-height: 1.5;
 }
 
 .reservation-card__form {
@@ -144,5 +206,18 @@
 @media (max-width: 640px) {
     .account-panel {
         padding: 24px;
+    }
+
+    .reservation-card__content {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .reservation-card__seats {
+        justify-items: start;
+    }
+
+    .reservation-card__seat-list {
+        justify-content: flex-start;
     }
 }
