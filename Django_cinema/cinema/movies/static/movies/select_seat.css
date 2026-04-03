@@ -1,0 +1,114 @@
+.seat-selection {
+    display: grid;
+    gap: 24px;
+}
+
+.seat-selection__panel {
+    padding: 30px 32px 34px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg-panel-strong);
+    box-shadow: var(--shadow-soft);
+}
+
+.seat-selection__eyebrow {
+    margin: 0 0 10px;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.seat-selection__title {
+    margin: 0 0 24px;
+    font-size: clamp(1.9rem, 3vw, 3rem);
+    line-height: 1.05;
+}
+
+.seat-selection__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.seat-selection__pill {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(184, 92, 56, 0.1);
+    color: var(--accent-dark);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.seat-selection__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.seat-selection__legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.seat-selection__legend-item::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+}
+
+.seat-selection__legend-item--available::before {
+    background: rgba(184, 92, 56, 0.14);
+    border: 1px solid rgba(184, 92, 56, 0.24);
+}
+
+.seat-selection__legend-item--occupied::before {
+    background: rgba(114, 128, 138, 0.2);
+    border: 1px solid rgba(82, 96, 109, 0.24);
+}
+
+.seat-selection__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+    gap: 12px;
+}
+
+.seat-selection__seat {
+    display: grid;
+    place-items: center;
+    min-height: 64px;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.seat-selection__seat--available {
+    border: 1px solid rgba(184, 92, 56, 0.18);
+    background: rgba(184, 92, 56, 0.08);
+    color: var(--accent-dark);
+}
+
+.seat-selection__seat--occupied {
+    border: 1px solid rgba(82, 96, 109, 0.16);
+    background: rgba(82, 96, 109, 0.12);
+    color: var(--text-soft);
+}
+
+@media (max-width: 640px) {
+    .seat-selection__panel {
+        padding: 24px;
+    }
+
+    .seat-selection__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}

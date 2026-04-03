@@ -53,9 +53,6 @@ class Hall(models.Model):
         if is_new:
             self.create_seats()
 
-
-
-
 class Seat(models.Model):
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
     number = models.PositiveSmallIntegerField()

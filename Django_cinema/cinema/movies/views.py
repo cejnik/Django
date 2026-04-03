@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from . models import Film, Screening, Reservation
+from . models import Film, Screening, Reservation, Seat
 from . forms import RegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -74,7 +74,7 @@ def create_reservation(request, screening_id):
         messages.error(request, "Please enter a valid ticket count.")
         return redirect('movie_detail', slug=screening_now.film.slug)
     messages.success(request, 'Your reservation has been saved.')
-    return redirect('reservation')
+    return redirect('select_seat_url', reservation_id=reservation.id)
     
 @login_required      
 def delete_reservation(request, reservation_id):
@@ -85,3 +85,35 @@ def delete_reservation(request, reservation_id):
         return redirect('reservation')
     else:
         return redirect('reservation')
+
+@login_required
+def select_seats(request,reservation_id):
+    reservation = get_object_or_404(Reservation,id=reservation_id, user=request.user)
+    screening = reservation.screening
+    hall = screening.hall
+
+    if hall is None:
+        messages.error(request, 'This screening does not have an assigned hall.')
+        return redirect('reservation')
+    
+    hall_seats = Seat.objects.filter(hall=hall)
+
+    screening_reservations = Reservation.objects.filter(screening=screening)
+
+    occupied_seats = set()
+    for one_reservation in screening_reservations:
+        for seat in one_reservation.reserved_seats.all():
+            occupied_seats.add(seat)
+
+    available_seats = []
+    for seat in hall_seats:
+        if seat not in occupied_seats:
+            available_seats.append(seat)
+
+    return render(request, 'movies/select_seat.html', {
+        'reservation': reservation,
+        'screening': screening,
+        'hall_seats': hall_seats,
+        'occupied_seats': occupied_seats,
+        'available_seats': available_seats,
+    })
