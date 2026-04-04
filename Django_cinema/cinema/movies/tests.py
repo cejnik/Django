@@ -76,14 +76,14 @@ class ReservationTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Reservation.objects.count(),1)
         self.assertEqual(reservation.tickets_count,2)
-        self.assertRedirects(response, reverse('reservation'))
+        self.assertRedirects(response, reverse('select_seat_url', args=[reservation.id]))
         
         response = self.client.post(
             reverse('create_reservation_url', args=[self.screening.id]), {'tickets_count': 4})
         reservation = Reservation.objects.first()
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Reservation.objects.count(),1)
-        self.assertRedirects(response, reverse('reservation'))
+        self.assertRedirects(response, reverse('select_seat_url',args=[reservation.id]))
         self.assertEqual(reservation.tickets_count,4)
 
 
@@ -126,3 +126,71 @@ class ReservationTests(TestCase):
         self.assertListEqual(actual_seats, expected_seats)
 
 
+    def test_select_seats(self):
+        reservation = Reservation.objects.create(
+            user = self.user,
+            screening = self.screening,
+            tickets_count = 2
+        )
+        seat1, seat2 = Seat.objects.filter(hall=self.hall)[:2]
+        seat_data = {
+            'one_seat': [seat1.id, seat2.id]}
+        response = self.client.post(reverse('select_seat_url', args=[reservation.id]), seat_data)
+        self.assertRedirects(response, reverse('reservation'))
+        reservation.refresh_from_db()
+        self.assertEqual(reservation.reserved_seats.count(),2)
+        reservation_seats = reservation.reserved_seats.all()
+        self.assertIn(seat1, reservation_seats)
+        self.assertIn(seat2, reservation_seats)
+
+    def test_select_seats_with_invalid_count(self):
+        reservation = Reservation.objects.create (
+            user = self.user,
+            screening = self.screening,
+            tickets_count = 2
+        )
+        seat1 = Seat.objects.filter(hall=self.hall).first()
+        seat_data = {'one_seat': seat1.id}
+        response = self.client.post(reverse('select_seat_url', args=[reservation.id]), seat_data)
+        self.assertRedirects(response, reverse('select_seat_url', args=[reservation.id])) 
+        reservation.refresh_from_db()
+        self.assertEqual(reservation.reserved_seats.count(),0)
+
+    def test_select_already_reserved_seat(self):
+        reservation1 = Reservation.objects.create(
+            user = self.user,
+            screening = self.screening,
+            tickets_count = 1,
+        )
+        seat1 = Seat.objects.filter(hall=self.hall).first()
+        reservation1.reserved_seats.add(seat1)
+
+        reservation2 = Reservation.objects.create(
+            user = self.user,
+            screening = self.screening,
+            tickets_count = 1
+        )
+
+        seat_data = {'one_seat': [seat1.id]}
+        response = self.client.post(reverse('select_seat_url', args=[reservation2.id]), seat_data)
+        self.assertRedirects(response,reverse('select_seat_url', args=[reservation2.id]))
+        reservation2.refresh_from_db()
+        self.assertEqual(reservation2.reserved_seats.count(),0)
+
+    def test_seat_from_different_hall(self):
+        reservation = Reservation.objects.create(
+            user = self.user,
+            screening = self.screening,
+            tickets_count = 1
+        )
+
+        hall2 = Hall.objects.create(
+            name = 'hall2_testing',
+            capacity = 20
+        )
+        seat_from_different_hall = Seat.objects.filter(hall = hall2).first()
+        seat_data = {'one_seat': [seat_from_different_hall.id]}
+        response = self.client.post(reverse('select_seat_url', args=[reservation.id]), seat_data)
+        self.assertRedirects(response, reverse('select_seat_url', args=[reservation.id]))
+        reservation.refresh_from_db()
+        self.assertEqual(reservation.reserved_seats.count(),0)
