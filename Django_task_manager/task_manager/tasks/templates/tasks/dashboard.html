@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+{% block content %}
+<main class="dashboard-shell">
+    <section class="dashboard-panel">
+        <div class="dashboard-topbar">
+            <div>
+                <p class="dashboard-eyebrow">Workspace</p>
+                <h1 class="dashboard-title">Your projects</h1>
+                <p class="dashboard-subtitle">Create a project, open it, and start organizing team work.</p>
+            </div>
+
+            <div class="dashboard-actions">
+                <a href="{% url "create_project_url" %}" class="dashboard-link-button">Create project</a>
+                <form action="{% url "logout_url" %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="dashboard-ghost-button">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="project-grid">
+            {% for one_project in projects %}
+                <article class="project-card">
+                    <p class="project-card-label">Project</p>
+                    <h2 class="project-card-title">{{ one_project.name }}</h2>
+                    <p class="project-card-description">
+                        {% if one_project.description %}
+                            {{ one_project.description }}
+                        {% else %}
+                            No description yet. Open the project and start shaping the work.
+                        {% endif %}
+                    </p>
+                    <p class="project-card-meta">Created by {{ one_project.created_by }}</p>
+                </article>
+            {% empty %}
+                <article class="empty-state-card">
+                    <p class="project-card-label">No projects yet</p>
+                    <h2 class="project-card-title">Start with your first project</h2>
+                    <p class="project-card-description">Create a project and it will appear here as a card on your dashboard.</p>
+                    <a href="{% url "create_project_url" %}" class="dashboard-link-button">Create project</a>
+                </article>
+            {% endfor %}
+        </section>
+    </section>
+</main>
+
+{% endblock content %}
+
+
+
