@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Project Details{% endblock title %}
+{% block content %}
+<main class="dashboard-shell">
+    <section class="dashboard-panel">
+        <div class="dashboard-topbar">
+            <div>
+                <p class="dashboard-eyebrow">Project detail</p>
+                <h1 class="dashboard-title">{{ project.name }}</h1>
+                <p class="dashboard-subtitle">
+                    {% if project.description %}
+                        {{ project.description }}
+                    {% else %}
+                        This project does not have a description yet. You can add tasks here in the next step.
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="dashboard-actions">
+                <a href="{% url "dashboard" %}" class="dashboard-ghost-link">Back to dashboard</a>
+            </div>
+        </div>
+
+        <section class="detail-grid">
+            <article class="detail-card">
+                <p class="project-card-label">Created by</p>
+                <h2 class="detail-card-value">{{ project.created_by }}</h2>
+            </article>
+
+            <article class="detail-card">
+                <p class="project-card-label">Created at</p>
+                <h2 class="detail-card-value">{{ project.created_at }}</h2>
+            </article>
+        </section>
+        <section class="task-container">
+            <div class="task-section-header">
+                <div>
+                    <p class="project-card-label">Tasks</p>
+                    <h2 class="project-card-title">Project tasks</h2>
+                    <p class="project-card-description">This is the current task list for the selected project.</p>
+                </div>
+            </div>
+
+            <div class="task-list">
+            {% for one_task in tasks %}
+                <article class="task-card">
+                    <p class="project-card-label">{{one_task.title}}</p>
+                    <h3 class="task-card-title">{{ one_task.title }}</h3>
+                    <p class="task-card-description">
+                        {% if one_task.description %}
+                            {{ one_task.description }}
+                        {% else %}
+                            No description has been added for this task yet.
+                        {% endif %}
+                    </p>
+                    <div class="task-card-meta-row">
+                        <span class="task-pill">{{ one_task.status }}</span>
+                        <span class="task-pill">{{ one_task.priority }}</span>
+                    </div>
+                </article>
+            {% empty %}
+                <article class="empty-state-card">
+                    <p class="project-card-label">No tasks yet</p>
+                    <h3 class="task-card-title">This project is still empty</h3>
+                    <p class="project-card-description">The task list will appear here once you start creating tasks for this project.</p>
+                </article>
+            {% endfor %}
+            </div>
+        </section>
+    </section>
+</main>
+{% endblock content %}

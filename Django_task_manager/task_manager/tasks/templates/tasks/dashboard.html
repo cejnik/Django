@@ -22,10 +22,12 @@
 
         <section class="project-grid">
             {% for one_project in projects %}
+            <a href="{% url "project_detail_url" one_project.pk %}" class="project-card-link">
                 <article class="project-card">
                     <p class="project-card-label">Project</p>
                     <h2 class="project-card-title">{{ one_project.name }}</h2>
                     <p class="project-card-description">
+                        
                         {% if one_project.description %}
                             {{ one_project.description }}
                         {% else %}
@@ -34,6 +36,7 @@
                     </p>
                     <p class="project-card-meta">Created by {{ one_project.created_by }}</p>
                 </article>
+            </a>
             {% empty %}
                 <article class="empty-state-card">
                     <p class="project-card-label">No projects yet</p>
@@ -47,6 +50,5 @@
 </main>
 
 {% endblock content %}
-
 
 

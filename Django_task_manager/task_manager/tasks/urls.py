@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout_url'),
     path('register/', views.register, name='registration_url'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('create-project/', views.createproject, name='create_project_url')
+    path('create-project/', views.createproject, name='create_project_url'),
+    path('project-detail/<int:pk>/', views.project_detail, name='project_detail_url'),
 ]
