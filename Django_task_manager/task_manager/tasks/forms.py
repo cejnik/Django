@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
-from .models import Project
+from .models import Project, Task
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(label='Insert your username: ')
     email = forms.EmailField(label='Enter your email: ')
@@ -24,4 +24,7 @@ class ProjectCreationForm(forms.ModelForm):
         fields = ['name', 'description']
     
 
-    
+class TaskCreationForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'status', 'priority', 'assigned_to']

@@ -40,6 +40,9 @@
                     <h2 class="project-card-title">Project tasks</h2>
                     <p class="project-card-description">This is the current task list for the selected project.</p>
                 </div>
+                <div>
+                    <a href="{% url "task_url" project.pk %}" class="dashboard-link-button">Add task</a>
+                </div>
             </div>
 
             <div class="task-list">
@@ -55,8 +58,8 @@
                         {% endif %}
                     </p>
                     <div class="task-card-meta-row">
-                        <span class="task-pill">{{ one_task.status }}</span>
-                        <span class="task-pill">{{ one_task.priority }}</span>
+                        <span class="task-pill">{{ one_task.get_status_display }}</span>
+                        <span class="task-pill">{{ one_task.get_priority_display }}</span>
                     </div>
                 </article>
             {% empty %}

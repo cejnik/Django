@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegistrationForm, ProjectCreationForm
+from .forms import RegistrationForm, ProjectCreationForm, TaskCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Project, Task
 
@@ -50,5 +50,29 @@ def project_detail(request, pk):
     return render(request, 'tasks/project_detail.html', {
         'project': project,
         'tasks':tasks
+    })
+
+@login_required
+def task(request, project_id):
+    project= get_object_or_404(Project, pk = project_id, created_by = request.user)
+    if request.method == 'POST':
+        form = TaskCreationForm(request.POST)
+        if form.is_valid():
+            task = Task(
+                project = project,
+                title = form.cleaned_data['title'],
+                description = form.cleaned_data['description'],
+                status = form.cleaned_data['status'],
+                priority = form.cleaned_data['priority'],
+                created_by = request.user,
+                assigned_to = form.cleaned_data['assigned_to']              
+            )
+            task.save()
+            return redirect('project_detail_url', project.pk )
+
+    else:
+        form = TaskCreationForm()
+    return render(request, 'tasks/task_creation.html', {
+        'form': form
     })
 
