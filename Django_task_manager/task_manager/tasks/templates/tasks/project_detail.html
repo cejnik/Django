@@ -60,6 +60,7 @@
                     <div class="task-card-meta-row">
                         <span class="task-pill">{{ one_task.get_status_display }}</span>
                         <span class="task-pill">{{ one_task.get_priority_display }}</span>
+                        <span class="task-pill">{{ one_task.assigned_to }}</span>
                     </div>
                 </article>
             {% empty %}
