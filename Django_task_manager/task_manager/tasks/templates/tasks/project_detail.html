@@ -18,7 +18,9 @@
             </div>
 
             <div class="dashboard-actions">
+                <a href="{% url "delete_project_url" project.pk %}" class="danger-link-button">Delete project</a>
                 <a href="{% url "dashboard" %}" class="dashboard-ghost-link">Back to dashboard</a>
+                
             </div>
         </div>
 
@@ -61,6 +63,7 @@
                         <span class="task-pill">{{ one_task.get_status_display }}</span>
                         <span class="task-pill">{{ one_task.get_priority_display }}</span>
                         <span class="task-pill">{{ one_task.assigned_to }}</span>
+                        <a href="{% url "delete_task_url" one_task.pk %}" class="danger-inline-link">Delete task</a>
                     </div>
                 </article>
             {% empty %}

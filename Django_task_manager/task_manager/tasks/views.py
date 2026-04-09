@@ -76,3 +76,26 @@ def task(request, project_id):
         'form': form
     })
 
+@login_required
+def delete_project(request, pk):
+    project = get_object_or_404(Project, pk=pk, created_by = request.user)
+    if request.method == 'POST':
+        project.delete()
+        return redirect('dashboard')
+    else:
+        return render(request, 'tasks/delete_project.html', {
+            'project': project
+        })
+        
+@login_required
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk = pk, created_by= request.user)
+    project= task.project
+    if request.method == 'POST':
+        task.delete()
+        return redirect('project_detail_url', project.pk)
+    else:
+        return render(request, 'tasks/delete_task.html', {
+            'task': task
+        })
+

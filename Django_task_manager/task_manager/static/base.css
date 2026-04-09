@@ -175,7 +175,8 @@ ul.errorlist {
 }
 
 .dashboard-panel,
-.form-panel {
+.form-panel,
+.confirm-panel {
     border: 1px solid var(--space-card-border);
     border-radius: 1.75rem;
     background: var(--space-card);
@@ -190,6 +191,12 @@ ul.errorlist {
 
 .form-panel {
     width: min(100%, 40rem);
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.confirm-panel {
+    width: min(100%, 42rem);
     margin: 0 auto;
     padding: 2rem;
 }
@@ -233,7 +240,8 @@ ul.errorlist {
 
 .dashboard-link-button,
 .dashboard-ghost-button,
-.dashboard-ghost-link {
+.dashboard-ghost-link,
+.danger-link-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -255,14 +263,29 @@ ul.errorlist {
     cursor: pointer;
 }
 
+.danger-link-button {
+    border: 1px solid rgba(255, 107, 107, 0.28);
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    color: #220705;
+}
+
+.danger-link-button-solid {
+    cursor: pointer;
+}
+
 .dashboard-link-button:hover,
 .dashboard-ghost-button:hover,
-.dashboard-ghost-link:hover {
+.dashboard-ghost-link:hover,
+.danger-link-button:hover {
     transform: translateY(-2px);
 }
 
 .dashboard-link-button:hover {
     box-shadow: 0 12px 26px rgba(116, 192, 252, 0.25);
+}
+
+.danger-link-button:hover {
+    box-shadow: 0 12px 26px rgba(255, 107, 107, 0.24);
 }
 
 .dashboard-ghost-button,
@@ -535,6 +558,42 @@ ul.errorlist {
     color: var(--space-text);
     font-size: 0.9rem;
     font-weight: 600;
+}
+
+.danger-inline-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid rgba(255, 107, 107, 0.26);
+    border-radius: 999px;
+    background: rgba(255, 107, 107, 0.08);
+    color: #ffd3d3;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.danger-inline-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 107, 107, 0.5);
+    background: rgba(255, 107, 107, 0.14);
+}
+
+.confirm-eyebrow {
+    margin: 0 0 0.75rem;
+    color: #ff9a8b;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.confirm-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
 }
 
 @keyframes fade-up {

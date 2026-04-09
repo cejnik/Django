@@ -10,5 +10,8 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('create-project/', views.createproject, name='create_project_url'),
     path('project-detail/<int:pk>/', views.project_detail, name='project_detail_url'),
-    path('create-task/<int:project_id>', views.task, name='task_url')
+    path('create-task/<int:project_id>/', views.task, name='task_url'),
+    path('projects/<int:pk>/delete/', views.delete_project, name='delete_project_url'),
+    path('tasks/<int:pk>/delete/', views.delete_task, name= 'delete_task_url'),
+
 ]
