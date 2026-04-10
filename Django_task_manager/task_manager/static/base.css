@@ -105,6 +105,15 @@ ul.errorlist {
     margin-bottom: 2rem;
 }
 
+.dashboard-topbar > div:first-child {
+    flex: 1 1 50%;
+    max-width: 50%;
+}
+
+.dashboard-topbar > .dashboard-actions {
+    flex: 0 1 auto;
+}
+
 .dashboard-eyebrow {
     margin: 0 0 0.75rem;
     color: var(--space-accent);
@@ -131,6 +140,7 @@ ul.errorlist {
 .task-form-actions {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.85rem;
 }
 
@@ -228,5 +238,11 @@ ul.errorlist {
     .project-form-actions {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .dashboard-topbar > div:first-child,
+    .dashboard-topbar > .dashboard-actions {
+        max-width: none;
+        flex: 1 1 auto;
     }
 }

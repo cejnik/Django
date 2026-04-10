@@ -21,9 +21,9 @@
             </div>
 
             <div class="dashboard-actions">
+                <a href="{% url "project_edit_url" project.pk %}" class="dashboard-link-button">Edit project</a>
                 <a href="{% url "delete_project_url" project.pk %}" class="danger-link-button">Delete project</a>
                 <a href="{% url "dashboard" %}" class="dashboard-ghost-link">Back to dashboard</a>
-                
             </div>
         </div>
 

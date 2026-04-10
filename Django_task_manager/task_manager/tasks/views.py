@@ -99,3 +99,17 @@ def delete_task(request, pk):
             'task': task
         })
 
+@login_required
+def edit_project(request, pk):
+    project = get_object_or_404(Project, pk=pk, created_by = request.user)
+    if request.method == 'POST':
+        form = ProjectCreationForm(request.POST, instance = project)
+        if form.is_valid():
+            form.save()
+            return redirect('project_detail_url', project.pk)
+    else:
+        form = ProjectCreationForm(instance=project)
+    return render(request, 'tasks/edit_project.html', {
+        'project': project,
+        'form': form
+    })
