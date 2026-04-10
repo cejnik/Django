@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Delete confirmation{% endblock title %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static "tasks/delete_task.css" %}">
+{% endblock css_styles %}
 {% block content %}
 <main class="dashboard-shell">
     <section class="confirm-panel">

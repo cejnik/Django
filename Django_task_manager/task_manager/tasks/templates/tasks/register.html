@@ -1,6 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Register{% endblock title %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static "tasks/register.css" %}">
+{% endblock css_styles %}
 
 {% block content %}
 <main class="auth-shell">

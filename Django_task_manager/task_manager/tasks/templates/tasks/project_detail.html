@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Project Details{% endblock title %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static "tasks/project_detail.css" %}">
+{% endblock css_styles %}
 {% block content %}
 <main class="dashboard-shell">
     <section class="dashboard-panel">
@@ -59,11 +62,15 @@
                             No description has been added for this task yet.
                         {% endif %}
                     </p>
-                    <div class="task-card-meta-row">
-                        <span class="task-pill">{{ one_task.get_status_display }}</span>
-                        <span class="task-pill">{{ one_task.get_priority_display }}</span>
-                        <span class="task-pill">{{ one_task.assigned_to }}</span>
-                        <a href="{% url "delete_task_url" one_task.pk %}" class="danger-inline-link">Delete task</a>
+                    <div class="task-card-footer">
+                        <div class="task-card-meta-row">
+                            <span class="task-pill">{{ one_task.get_status_display }}</span>
+                            <span class="task-pill">{{ one_task.get_priority_display }}</span>
+                            <span class="task-pill">{{ one_task.assigned_to }}</span>
+                        </div>
+                        <div class="task-card-actions">
+                            <a href="{% url "delete_task_url" one_task.pk %}" class="danger-inline-link">Delete task</a>
+                        </div>
                     </div>
                 </article>
             {% empty %}

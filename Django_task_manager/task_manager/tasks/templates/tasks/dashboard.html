@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Dashboard{% endblock title %}
+{% block css_styles %}
+    <link rel="stylesheet" href="{% static "tasks/dashboard.css" %}">
+{% endblock css_styles %}
 {% block content %}
 <main class="dashboard-shell">
     <section class="dashboard-panel">
@@ -50,5 +53,4 @@
 </main>
 
 {% endblock content %}
-
 
