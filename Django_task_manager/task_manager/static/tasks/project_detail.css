@@ -119,6 +119,7 @@
     display: flex;
     justify-content: flex-end;
     flex-shrink: 0;
+    gap: 0.65rem;
 }
 
 .task-pill {
@@ -132,6 +133,26 @@
     color: var(--space-text);
     font-size: 0.9rem;
     font-weight: 600;
+}
+
+.task-inline-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid rgba(116, 192, 252, 0.22);
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--space-accent), var(--space-accent-strong));
+    color: #03101e;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.task-inline-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px rgba(116, 192, 252, 0.2);
 }
 
 .danger-inline-link {

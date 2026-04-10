@@ -69,6 +69,7 @@
                             <span class="task-pill">{{ one_task.assigned_to }}</span>
                         </div>
                         <div class="task-card-actions">
+                            <a href="{% url "edit_task_url" one_task.pk %}" class="task-inline-link">Edit task</a>
                             <a href="{% url "delete_task_url" one_task.pk %}" class="danger-inline-link">Delete task</a>
                         </div>
                     </div>

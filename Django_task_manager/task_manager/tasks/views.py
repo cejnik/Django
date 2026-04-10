@@ -113,3 +113,18 @@ def edit_project(request, pk):
         'project': project,
         'form': form
     })
+
+@login_required
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk = pk, created_by= request.user)
+    if request.method == 'POST':
+        form = TaskCreationForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('project_detail_url', task.project.pk)
+    else:
+        form = TaskCreationForm(instance=task)
+    return render(request, 'tasks/edit_task.html', {
+        'form': form,
+        'task': task
+    })
