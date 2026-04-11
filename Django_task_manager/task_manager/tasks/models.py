@@ -32,3 +32,25 @@ class Task(models.Model):
     
     def __str__(self):
         return f'{self.title} {self.project}'
+
+class ProjectMembership(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    class Role(models.TextChoices):
+        OWNER = 'owner', 'Owner'
+        MEMBER = 'member', 'Member'
+    role = models.CharField(max_length=10, choices=Role.choices, default=Role.MEMBER)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['project', 'user'], name='unique_user_and_project')
+        ]
+        ordering = [
+            'project', 'user'
+        ]
+
+
+    def __str__(self):
+        return f'{self.user} is role in {self.project} and {self.role}'
+

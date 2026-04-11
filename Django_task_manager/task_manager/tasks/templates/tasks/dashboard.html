@@ -10,7 +10,7 @@
         <div class="dashboard-topbar">
             <div>
                 <p class="dashboard-eyebrow">Workspace</p>
-                <h1 class="dashboard-title">Your projects</h1>
+                <h1 class="dashboard-title">Welcome back, {{request.user.username}}</h1>
                 <p class="dashboard-subtitle">Create a project, open it, and start organizing team work.</p>
             </div>
 
@@ -37,7 +37,15 @@
                             No description yet. Open the project and start shaping the work.
                         {% endif %}
                     </p>
-                    <p class="project-card-meta">Created by {{ one_project.created_by }}</p>
+                    <div class="project-card-footer">
+                        <p class="project-card-meta">Created by {{ one_project.created_by }}</p>
+                        <p class="project-card-meta project-card-members">
+                            Members:
+                            {% for membership in one_project.projectmembership_set.all %}
+                                {{ membership.user.username }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
                 </article>
             </a>
             {% empty %}
@@ -53,4 +61,3 @@
 </main>
 
 {% endblock content %}
-

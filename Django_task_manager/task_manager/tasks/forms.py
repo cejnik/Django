@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from .models import Project, Task
+from django.contrib.auth import get_user_model
+
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(label='Insert your username')
     email = forms.EmailField(label='Enter your email')
@@ -28,3 +30,20 @@ class TaskCreationForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'description', 'status', 'priority', 'assigned_to']
+
+
+class AddProjectMemberForm(forms.Form):
+    username = forms.CharField(label='Add new member')
+    def clean_username(self):
+        username = self.cleaned_data["username"]
+        User = get_user_model()
+
+        try:
+            user = User.objects.get(username = username)
+        except User.DoesNotExist:
+            raise forms.ValidationError('User with this username does not exist.')
+        self.user = user
+        return username
+
+
+

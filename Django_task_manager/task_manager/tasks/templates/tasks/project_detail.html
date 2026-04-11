@@ -21,8 +21,13 @@
             </div>
 
             <div class="dashboard-actions">
+                {% if is_owner %}
+                    <a href="{% url "add_project_member_url" project.pk %}" class="dashboard-link-button">Add new member</a>
+                {% endif %}              
                 <a href="{% url "project_edit_url" project.pk %}" class="dashboard-link-button">Edit project</a>
+                {% if is_owner %}
                 <a href="{% url "delete_project_url" project.pk %}" class="danger-link-button">Delete project</a>
+                {% endif %}
                 <a href="{% url "dashboard" %}" class="dashboard-ghost-link">Back to dashboard</a>
             </div>
         </div>
