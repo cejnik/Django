@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
-from .models import Project, Task
+from .models import Project, Task, ProjectMembership
 from django.contrib.auth import get_user_model
 
 class RegistrationForm(UserCreationForm):
@@ -27,6 +27,15 @@ class ProjectCreationForm(forms.ModelForm):
     
 
 class TaskCreationForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        project = kwargs.pop('project', None)
+        super().__init__(*args, **kwargs)
+
+        if project:
+            User = get_user_model()
+            self.fields["assigned_to"].queryset = User.objects.filter(projectmembership__project=project)
+
     class Meta:
         model = Task
         fields = ['title', 'description', 'status', 'priority', 'assigned_to']

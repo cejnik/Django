@@ -50,19 +50,33 @@ def createproject(request):
 def project_detail(request, pk):
     project = get_object_or_404(Project, pk = pk, projectmembership__user = request.user)
     membership = ProjectMembership.objects.get(project=project, user = request.user)
+    memberships = ProjectMembership.objects.filter(project=project).select_related('user')
     is_owner = membership.role == ProjectMembership.Role.OWNER
     tasks = Task.objects.filter(project=project)
+    status = request.GET.get('status')
+    priority = request.GET.get("priority")
+    if status:
+        tasks = tasks.filter(status = status)
+    if priority:
+        tasks = tasks.filter(priority = priority)
+
     return render(request, 'tasks/project_detail.html', {
         'project': project,
-        'tasks':tasks,
+        'tasks': tasks,
         'is_owner': is_owner,
+        'memberships': memberships,
+        'selected_status':status,
+        'selected_priority': priority,
+        'status_choices': Task.Status.choices,
+        'priority_choices': Task.Priority.choices,
+
     })
 
 @login_required
 def task(request, project_id):
     project= get_object_or_404(Project, pk = project_id, projectmembership__user = request.user)
     if request.method == 'POST':
-        form = TaskCreationForm(request.POST)
+        form = TaskCreationForm(request.POST, project=project)
         if form.is_valid():
             task = Task(
                 project = project,
@@ -77,7 +91,7 @@ def task(request, project_id):
             return redirect('project_detail_url', project.pk )
 
     else:
-        form = TaskCreationForm()
+        form = TaskCreationForm(project=project)
     return render(request, 'tasks/task_creation.html', {
         'form': form
     })
@@ -85,15 +99,12 @@ def task(request, project_id):
 @login_required
 def delete_project(request, pk):
     project = get_object_or_404(Project, pk=pk, projectmembership__user = request.user, projectmembership__role = ProjectMembership.Role.OWNER)
-    membership = ProjectMembership.objects.get(project=project, user = request.user)
-    is_owner = membership.role == ProjectMembership.Role.OWNER
     if request.method == 'POST':
         project.delete()
         return redirect('dashboard')
     else:
         return render(request, 'tasks/delete_project.html', {
             'project': project,
-            'is_owner': is_owner,
         })
         
 @login_required
@@ -127,12 +138,12 @@ def edit_project(request, pk):
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk = pk, project__projectmembership__user = request.user)
     if request.method == 'POST':
-        form = TaskCreationForm(request.POST, instance=task)
+        form = TaskCreationForm(request.POST, instance=task, project = task.project)
         if form.is_valid():
             form.save()
             return redirect('project_detail_url', task.project.pk)
     else:
-        form = TaskCreationForm(instance=task)
+        form = TaskCreationForm(instance=task, project = task.project)
     return render(request, 'tasks/edit_task.html', {
         'form': form,
         'task': task
