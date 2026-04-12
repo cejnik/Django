@@ -4,8 +4,6 @@ from django.contrib.auth import get_user_model
 from .models import Project, ProjectMembership, Task
 from .forms import TaskCreationForm
 
-# Create your tests here.
-
 class ProjectPermissionTests(TestCase):
     def setUp(self):
         User = get_user_model()
@@ -25,9 +23,9 @@ class ProjectPermissionTests(TestCase):
         )
 
         self.project = Project.objects.create(
-            name = 'Test Project',
-            description = 'Test project description',
-            created_by = self.owner,
+            name='Test Project',
+            description='Test project description',
+            created_by=self.owner,
         )
 
         ProjectMembership.objects.create(
@@ -65,7 +63,7 @@ class ProjectPermissionTests(TestCase):
 
         response = self.client.get(reverse('dashboard'))
 
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, 'Test Project')
         
     def test_member_can_open_shared_project_detail(self):
@@ -112,7 +110,7 @@ class ProjectPermissionTests(TestCase):
     def test_owner_can_open_add_project_member_page(self):
         self.client.force_login(self.owner)
         response = self.client.get(reverse('add_project_member_url', args=[self.project.pk]))
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Add new member')
 
     def test_member_cannot_open_add_project_member_page(self):
@@ -123,7 +121,7 @@ class ProjectPermissionTests(TestCase):
     def test_owner_can_add_project_member(self):
         self.client.force_login(self.owner)
         data = {
-            'username':self.outsider.username
+            'username': self.outsider.username
         }
         response = self.client.post(reverse('add_project_member_url', args=[self.project.pk]), data)
         self.assertEqual(response.status_code,302)
@@ -138,10 +136,10 @@ class ProjectPermissionTests(TestCase):
     def test_owner_cannot_add_project_member_twice(self):
         self.client.force_login(self.owner)
         data = {
-            'username':self.member.username
+            'username': self.member.username
         }
         response = self.client.post(reverse('add_project_member_url', args=[self.project.pk]), data)
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, "This user is already a member of this project.")
         self.assertEqual(ProjectMembership.objects.filter(
                 project=self.project,
@@ -150,7 +148,6 @@ class ProjectPermissionTests(TestCase):
             ).count(),1
             )
 
- #Task Testing
     def test_member_can_open_create_task_page(self):
         self.client.force_login(self.member)
         response = self.client.get(reverse('task_url', args=[self.project.pk]))
@@ -274,7 +271,6 @@ class ProjectPermissionTests(TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertTrue(Task.objects.filter(pk=self.task.pk).exists())
 
-#Form test
 class TaskCreationFormTests(TestCase):
     def setUp(self):
         User = get_user_model()
@@ -295,9 +291,9 @@ class TaskCreationFormTests(TestCase):
         )
 
         self.project = Project.objects.create(
-            name = 'Test Project',
-            description = 'Test project description',
-            created_by = self.owner,
+            name='Test Project',
+            description='Test project description',
+            created_by=self.owner,
         )
 
         ProjectMembership.objects.create(
@@ -330,7 +326,6 @@ class TaskCreationFormTests(TestCase):
         self.assertIn(self.member, assigned_users)  
         self.assertNotIn(self.outsider, assigned_users)
 
-#Filter Tests
 class TaskFilterTests(TestCase):
     def setUp(self):
         User = get_user_model()
@@ -342,9 +337,9 @@ class TaskFilterTests(TestCase):
         )
 
         self.project = Project.objects.create(
-            name = 'Test Project',
-            description = 'Test project description',
-            created_by = self.owner,
+            name='Test Project',
+            description='Test project description',
+            created_by=self.owner,
         )
         ProjectMembership.objects.create(
             project = self.project,

@@ -1,7 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-# Create your models here.
 class Project(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=400, blank=True)
@@ -52,5 +51,5 @@ class ProjectMembership(models.Model):
 
 
     def __str__(self):
-        return f'{self.user} is role in {self.project} and {self.role}'
+        return f'{self.user} - {self.project} - {self.role}'
 

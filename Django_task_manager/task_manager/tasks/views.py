@@ -3,7 +3,6 @@ from .forms import RegistrationForm, ProjectCreationForm, TaskCreationForm, AddP
 from django.contrib.auth.decorators import login_required
 from .models import Project, Task, ProjectMembership
 
-# Create your views here.
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -24,7 +23,7 @@ def dashboard(request):
     })
 
 @login_required
-def createproject(request):
+def create_project(request):
     if request.method == 'POST':
         form = ProjectCreationForm(request.POST)
         if form.is_valid():
@@ -73,7 +72,7 @@ def project_detail(request, pk):
     })
 
 @login_required
-def task(request, project_id):
+def create_task(request, project_id):
     project= get_object_or_404(Project, pk = project_id, projectmembership__user = request.user)
     if request.method == 'POST':
         form = TaskCreationForm(request.POST, project=project)
@@ -98,7 +97,7 @@ def task(request, project_id):
 
 @login_required
 def delete_project(request, pk):
-    project = get_object_or_404(Project, pk=pk, projectmembership__user = request.user, projectmembership__role = ProjectMembership.Role.OWNER)
+    project = get_object_or_404(Project, pk = pk, projectmembership__user = request.user, projectmembership__role = ProjectMembership.Role.OWNER)
     if request.method == 'POST':
         project.delete()
         return redirect('dashboard')
@@ -121,7 +120,7 @@ def delete_task(request, pk):
 
 @login_required
 def edit_project(request, pk):
-    project = get_object_or_404(Project, pk=pk, projectmembership__user = request.user)
+    project = get_object_or_404(Project, pk = pk, projectmembership__user = request.user)
     if request.method == 'POST':
         form = ProjectCreationForm(request.POST, instance = project)
         if form.is_valid():
@@ -138,12 +137,12 @@ def edit_project(request, pk):
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk = pk, project__projectmembership__user = request.user)
     if request.method == 'POST':
-        form = TaskCreationForm(request.POST, instance=task, project = task.project)
+        form = TaskCreationForm(request.POST, instance = task, project = task.project)
         if form.is_valid():
             form.save()
             return redirect('project_detail_url', task.project.pk)
     else:
-        form = TaskCreationForm(instance=task, project = task.project)
+        form = TaskCreationForm(instance = task, project = task.project)
     return render(request, 'tasks/edit_task.html', {
         'form': form,
         'task': task
@@ -151,12 +150,12 @@ def edit_task(request, pk):
 
 @login_required
 def add_project_member(request, pk):
-    project = get_object_or_404(Project, pk=pk, projectmembership__user = request.user, projectmembership__role = ProjectMembership.Role.OWNER)   
+    project = get_object_or_404(Project, pk = pk, projectmembership__user = request.user, projectmembership__role = ProjectMembership.Role.OWNER)   
     if request.method == 'POST':
         form = AddProjectMemberForm(request.POST)
         if form.is_valid():
             user_to_add = form.user
-            if ProjectMembership.objects.filter(project=project, user=user_to_add).exists():
+            if ProjectMembership.objects.filter(project = project, user = user_to_add).exists():
                 form.add_error("username", "This user is already a member of this project.")
             else:
                 projectmembership = ProjectMembership(
