@@ -9,12 +9,15 @@
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
     gap: 1.25rem;
 }
 
 .project-card-link {
     display: block;
+    min-width: 0;
+    height: 100%;
     color: inherit;
     text-decoration: none;
 }
@@ -32,10 +35,12 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
-    min-height: 17rem;
+    height: 100%;
+    min-height: 18rem;
+    overflow: hidden;
     padding: 1.4rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1.25rem;
+    border-radius: 0.5rem;
     background: rgba(255, 255, 255, 0.04);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
@@ -55,6 +60,11 @@
     font-size: 1.35rem;
     min-height: 3.1rem;
     line-height: 1.2;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .project-card-description {
@@ -72,6 +82,7 @@
     margin: 0;
     color: rgba(244, 247, 255, 0.78);
     font-size: 0.92rem;
+    overflow-wrap: anywhere;
 }
 
 .project-card-footer {
@@ -79,14 +90,25 @@
     justify-content: space-between;
     gap: 1rem;
     margin-top: auto;
+    min-height: 2.8rem;
 }
 
 .project-card-members {
     text-align: right;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .empty-state-card .dashboard-link-button {
     margin-top: 0.35rem;
+}
+
+@media (max-width: 980px) {
+    .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 640px) {
@@ -103,5 +125,9 @@
 
     .project-card-members {
         text-align: left;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
     }
 }
